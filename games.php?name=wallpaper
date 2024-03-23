@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+		<head>
+				<meta charset="utf-8">
+				<title>tny</title>
+				<link rel="stylesheet" href="style.css">
+		</head>
+		<body>
+				<header>
+						<a href="index.php"><h2>Tny</h2></a>
+						<nav>
+								<ul class="menu">
+										<li><a href="about.php">About</a></li>
+										<li><a href="tutorial.php">Tutorial</a></li>
+										<li><a href="reference.php">Reference</a></li>
+										<li><a href="https://sr.ht/~m15o/tny/">Download</a></li>
+										<li><a href="ide.html">Web IDE</a></li>
+										<li><a href="launcher.php">Launcher</a></li>
+										<li><a href="games.php">Games</a></li>
+								</ul>
+						</nav>
+				</header>
+				<main>
+		<script src="tny.js"></script>
+		<script>
+		 try {
+				 rom = msm.assemble(`2 0 RND RND LIT 2 MOD SET`);
+				 console.log(rom);
+		 } catch(e) {
+				 errors.innerHTML = e.toString()
+		 }
+		</script>
+		<h1>wallpaper</h1>
+		<p id="share"></p>
+		<table>
+				<tr>
+						<td>Name</td>
+						<td>wallpaper</td>
+				</tr>
+				<tr>
+						<td>Author</td>
+						<td>m15o</td>
+				</tr>
+				<tr>
+						<td>Instructions</td>
+						<td>Pixels appear and disappear</td>
+				</tr>
+				<tr>
+						<td>Size</td>
+						<td id="size"></td>
+				</tr>
+				<tr>
+						<td>Source</td>
+						<td><pre><code>2 0 RND RND LIT 2 MOD SET</code></pre></td>
+				</tr>
+		</table>
+
+		<script>
+		 document.getElementById("share").innerHTML = `<a href="emulator.php?r=${btoa(rom.map(e&#32;=&gt;&#32;String.fromCharCode(e)).join(''))}">play<a>`;
+
+		 const bytes = new Uint8Array(rom);
+		 const blob = new Blob([bytes], { type: 'application/octet-stream' });
+		 
+		 document.getElementById("share").innerHTML += `&nbsp;<a href="https://tny.m15o.net/${URL.createObjectURL(blob)}" download="wallpaper.rom">download<a>`;
+
+		 document.getElementById("size").innerHTML = rom.length + " B";
+		</script>
+        </main>
+		</body>
+</html>

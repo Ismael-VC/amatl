@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+		<head>
+				<meta charset="utf-8">
+				<title>tny</title>
+				<link rel="stylesheet" href="style.css">
+		</head>
+		<body>
+				<header>
+						<a href="index.php"><h2>Tny</h2></a>
+						<nav>
+								<ul class="menu">
+										<li><a href="about.php">About</a></li>
+										<li><a href="tutorial.php">Tutorial</a></li>
+										<li><a href="reference.php">Reference</a></li>
+										<li><a href="https://sr.ht/~m15o/tny/">Download</a></li>
+										<li><a href="ide.html">Web IDE</a></li>
+										<li><a href="launcher.php">Launcher</a></li>
+										<li><a href="games.php">Games</a></li>
+								</ul>
+						</nav>
+				</header>
+				<main>
+		<script src="tny.js"></script>
+		<script>
+		 try {
+				 rom = msm.assemble(`3 0 BRK FRM LIT 4 MOD LIT @end JCN
+
+# draw buffer
+LIT 0 LIT 10 PSH PSH do: RSI LIT 40 SFT
+  LIT 0 LIT 10 PSH PSH while:
+    DUP RSI ADD OVR RSI ADD LDB SET
+    PUL INC PSH
+    RSI RSJ NEQ LIT @while JCN
+    PUL PUL POP POP POP
+  PUL INC PSH
+  RSI RSJ NEQ LIT @do JCN 
+  PUL PUL POP POP
+
+# draw player
+LIT pos: 1F LIT 1 SET
+
+# check collision
+LIT @pos LDA LIT 10 ADD LIT 04 SFT LIT 0 EQU LIT @hit JCN
+LIT @pos LDA LIT 10 ADD LDB LIT @hit JCN
+
+# move
+LIT @pos LDA LIT 10 ADD LIT @pos STA
+LIT 8 KEY EQU LIT @right JCN
+LIT 4 KEY EQU LIT @left  JCN
+end: BRK
+
+hit:
+  LIT 1 LIT @pos LDA STB
+  RND LIT 0F AND LIT @pos STA
+BRK
+
+move:
+  LIT 8 KEY EQU LIT @right JCN
+  LIT 4 KEY EQU LIT @left  JCN
+BRK
+
+right: LIT @pos LDA INC LDB LIT @end JCN LIT @pos LDA INC LIT @pos STA BRK
+left:  LIT @pos LDA DEC LDB LIT @end JCN LIT @pos LDA DEC LIT @pos STA BRK`);
+				 console.log(rom);
+		 } catch(e) {
+				 errors.innerHTML = e.toString()
+		 }
+		</script>
+		<h1>block</h1>
+		<p id="share"></p>
+		<table>
+				<tr>
+						<td>Name</td>
+						<td>block</td>
+				</tr>
+				<tr>
+						<td>Author</td>
+						<td>m15o</td>
+				</tr>
+				<tr>
+						<td>Instructions</td>
+						<td>Use keyboard to move block. Fill spaces!</td>
+				</tr>
+				<tr>
+						<td>Size</td>
+						<td id="size"></td>
+				</tr>
+				<tr>
+						<td>Source</td>
+						<td><pre><code>3 0 BRK FRM LIT 4 MOD LIT @end JCN
+
+# draw buffer
+LIT 0 LIT 10 PSH PSH do: RSI LIT 40 SFT
+  LIT 0 LIT 10 PSH PSH while:
+    DUP RSI ADD OVR RSI ADD LDB SET
+    PUL INC PSH
+    RSI RSJ NEQ LIT @while JCN
+    PUL PUL POP POP POP
+  PUL INC PSH
+  RSI RSJ NEQ LIT @do JCN 
+  PUL PUL POP POP
+
+# draw player
+LIT pos: 1F LIT 1 SET
+
+# check collision
+LIT @pos LDA LIT 10 ADD LIT 04 SFT LIT 0 EQU LIT @hit JCN
+LIT @pos LDA LIT 10 ADD LDB LIT @hit JCN
+
+# move
+LIT @pos LDA LIT 10 ADD LIT @pos STA
+LIT 8 KEY EQU LIT @right JCN
+LIT 4 KEY EQU LIT @left  JCN
+end: BRK
+
+hit:
+  LIT 1 LIT @pos LDA STB
+  RND LIT 0F AND LIT @pos STA
+BRK
+
+move:
+  LIT 8 KEY EQU LIT @right JCN
+  LIT 4 KEY EQU LIT @left  JCN
+BRK
+
+right: LIT @pos LDA INC LDB LIT @end JCN LIT @pos LDA INC LIT @pos STA BRK
+left:  LIT @pos LDA DEC LDB LIT @end JCN LIT @pos LDA DEC LIT @pos STA BRK</code></pre></td>
+				</tr>
+		</table>
+
+		<script>
+		 document.getElementById("share").innerHTML = `<a href="emulator.php?r=${btoa(rom.map(e&#32;=&gt;&#32;String.fromCharCode(e)).join(''))}">play<a>`;
+
+		 const bytes = new Uint8Array(rom);
+		 const blob = new Blob([bytes], { type: 'application/octet-stream' });
+		 
+		 document.getElementById("share").innerHTML += `&nbsp;<a href="https://tny.m15o.net/${URL.createObjectURL(blob)}" download="block.rom">download<a>`;
+
+		 document.getElementById("size").innerHTML = rom.length + " B";
+		</script>
+        </main>
+		</body>
+</html>

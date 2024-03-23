@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+		<head>
+				<meta charset="utf-8">
+				<title>tny</title>
+				<link rel="stylesheet" href="style.css">
+		</head>
+		<body>
+				<header>
+						<a href="index.php"><h2>Tny</h2></a>
+						<nav>
+								<ul class="menu">
+										<li><a href="about.php">About</a></li>
+										<li><a href="tutorial.php">Tutorial</a></li>
+										<li><a href="reference.php">Reference</a></li>
+										<li><a href="https://sr.ht/~m15o/tny/">Download</a></li>
+										<li><a href="ide.html">Web IDE</a></li>
+										<li><a href="launcher.php">Launcher</a></li>
+										<li><a href="games.php">Games</a></li>
+								</ul>
+						</nav>
+				</header>
+				<main>
+		<script src="tny.js"></script>
+		<script>
+		 try {
+				 rom = msm.assemble(`# This program shows how to draw sprites.
+# Sprites are 4x4, encoded in two bytes.
+# First byte encodes the top 2 lines (8 values).
+# Second byte encodes the bottom 2 lines (8 values).
+# High nibble encodes the top 4 pixels.
+# Low nibble encodess the bottom 4 pixels.
+
+0 0
+LIT 52
+DUP LIT @t LIT @draw JMR
+DUP LIT 4 ADD LIT @n LIT @draw JMR
+DUP LIT 8 ADD LIT @y LIT @draw JMR
+POP
+BRK
+
+draw: # pos adr
+  OVR OVR
+  LDA LIT @sprite JMR
+  SWP LIT 20 ADD SWP
+  INC LDA LIT @sprite JMR
+RET
+  
+sprite: # pos n --
+  LIT 0 LIT 8 PSH PSH do:
+    OVR
+    RSI LIT 4 DIV LIT 10 MUL  
+    RSI LIT 4 MOD ADD ADD
+    OVR LIT 80 RSI SFT AND
+    SET
+    PUL INC PSH
+    RSI RSJ LTH LIT @do JCN
+  PUL PUL POP POP POP POP
+RET
+
+t: 46 42
+n: 6a aa
+y: aa 48`);
+				 console.log(rom);
+		 } catch(e) {
+				 errors.innerHTML = e.toString()
+		 }
+		</script>
+		<h1>sprite</h1>
+		<p id="share"></p>
+		<table>
+				<tr>
+						<td>Name</td>
+						<td>sprite</td>
+				</tr>
+				<tr>
+						<td>Author</td>
+						<td>m15o</td>
+				</tr>
+				<tr>
+						<td>Instructions</td>
+						<td>Display tny on the screen</td>
+				</tr>
+				<tr>
+						<td>Size</td>
+						<td id="size"></td>
+				</tr>
+				<tr>
+						<td>Source</td>
+						<td><pre><code># This program shows how to draw sprites.
+# Sprites are 4x4, encoded in two bytes.
+# First byte encodes the top 2 lines (8 values).
+# Second byte encodes the bottom 2 lines (8 values).
+# High nibble encodes the top 4 pixels.
+# Low nibble encodess the bottom 4 pixels.
+
+0 0
+LIT 52
+DUP LIT @t LIT @draw JMR
+DUP LIT 4 ADD LIT @n LIT @draw JMR
+DUP LIT 8 ADD LIT @y LIT @draw JMR
+POP
+BRK
+
+draw: # pos adr
+  OVR OVR
+  LDA LIT @sprite JMR
+  SWP LIT 20 ADD SWP
+  INC LDA LIT @sprite JMR
+RET
+  
+sprite: # pos n --
+  LIT 0 LIT 8 PSH PSH do:
+    OVR
+    RSI LIT 4 DIV LIT 10 MUL  
+    RSI LIT 4 MOD ADD ADD
+    OVR LIT 80 RSI SFT AND
+    SET
+    PUL INC PSH
+    RSI RSJ LTH LIT @do JCN
+  PUL PUL POP POP POP POP
+RET
+
+t: 46 42
+n: 6a aa
+y: aa 48</code></pre></td>
+				</tr>
+		</table>
+
+		<script>
+		 document.getElementById("share").innerHTML = `<a href="emulator.php?r=${btoa(rom.map(e&#32;=&gt;&#32;String.fromCharCode(e)).join(''))}">play<a>`;
+
+		 const bytes = new Uint8Array(rom);
+		 const blob = new Blob([bytes], { type: 'application/octet-stream' });
+		 
+		 document.getElementById("share").innerHTML += `&nbsp;<a href="https://tny.m15o.net/${URL.createObjectURL(blob)}" download="sprite.rom">download<a>`;
+
+		 document.getElementById("size").innerHTML = rom.length + " B";
+		</script>
+        </main>
+		</body>
+</html>

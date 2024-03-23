@@ -1,0 +1,88 @@
+:root {
+		--color-1: lightgray;
+		--color-2: midnightblue;
+		--color-3: #333;
+		--color-4: silver;
+		--stroke: 2px;
+		--resizer: 2px;
+}
+
+body {
+		font-family: monospace;
+		background-color: var(--color-1);
+		display: flex;
+		justify-content: center;
+}
+
+#screen_wrapper {
+		display: block;
+}
+
+.editor {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 50%;
+		bottom: 0;
+		z-index: 0;
+		background-color: var(--color-1);
+		display: flex;
+		flex-direction: column;
+}
+
+.resizer {
+		display: block;
+		position: absolute;
+		top: 0;
+		left: 50%;
+		width: var(--resizer);
+		bottom: 0;
+		background-color: var(--color-3);
+		z-index: 1;
+		cursor: col-resize;
+}
+
+.preview {
+		width: inherit;
+		position: absolute;
+		top: 0;
+		left: 50%;
+		right: 0;
+		bottom: 0;
+		padding-left: var(--resizer);
+		background-color: var(--color-1);
+		overflow: scroll;
+}
+
+.title {
+		background-color: var(--color-2);
+		border-top: var(--stroke) solid var(--color-3);
+		border-bottom: var(--stroke) solid var(--color-4);
+		font-weight: bold;
+		color: white;
+}
+
+textarea {
+		flex-grow: 1;
+		resize: none;
+		border: none;
+		margin: 0;
+		outline: none;
+		white-space: pre;
+		overflow-wrap: normal;
+		overflow-x: scroll;		
+}
+
+.actions {
+		background-color: var(--color-4);
+}
+
+canvas {
+		image-rendering: pixelated;
+		width: 256px;
+		height: 256px;
+}
+
+a {
+		color: mediumorchid;
+}

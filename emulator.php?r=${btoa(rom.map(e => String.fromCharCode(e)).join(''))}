@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+		<head>
+				<meta charset="utf-8">
+				<title>tny</title>
+				<link rel="stylesheet" href="style.css">
+		</head>
+		<body>
+				<header>
+						<a href="index.php"><h2>Tny</h2></a>
+						<nav>
+								<ul class="menu">
+										<li><a href="about.php">About</a></li>
+										<li><a href="tutorial.php">Tutorial</a></li>
+										<li><a href="reference.php">Reference</a></li>
+										<li><a href="https://sr.ht/~m15o/tny/">Download</a></li>
+										<li><a href="ide.html">Web IDE</a></li>
+										<li><a href="launcher.php">Launcher</a></li>
+										<li><a href="games.php">Games</a></li>
+								</ul>
+						</nav>
+				</header>
+				<main>
+
+<style>
+ canvas {
+		 image-rendering: pixelated;
+		 width: 256px;
+		 height: 256px;
+ }
+</style>
+
+<h1>Emulator</h1>
+
+<canvas id="screen" width="16" height="16" tabindex=1></canvas>
+
+<script src="tny.js"></script>
+<script>
+ function display_update() {}
+ msm.run([...(atob(location.search.split("?r=")[1]))].map(e => e.charCodeAt(0)))
+ document.getElementById("screen").focus()
+</script>
+<script src="blit.js"></script>
+
+        </main>
+		</body>
+</html>

@@ -1,0 +1,60 @@
+body {
+		background-color: lightgray;
+		padding: 0;
+		margin: 0;
+}
+
+header {
+		position: fixed;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		width: 180px;
+		background-color: midnightblue;
+		padding: 10px;
+		box-sizing: border-box;
+}
+
+header ul {
+		padding-left: 0;
+		list-style: none;
+}
+
+main {
+		margin-left: 190px;
+		max-width: 600px;
+}
+
+a {
+		color: mediumorchid;
+}
+
+table {
+		font-family: monospace;
+}
+
+th {
+		background-color: midnightblue;
+		color: white;
+}
+
+table tr:nth-child(even) {
+		background-color: darkgrey;
+}
+
+article h2 {
+		font-size: 1.2em;
+}
+
+.menu li a {
+		margin-bottom: 5px;
+		background-color: darkslateblue;
+		padding: 5px;		
+		color: white;
+		text-decoration: none;
+		display: block;
+}
+
+.menu li a:hover {
+		background-color: mediumorchid;
+}

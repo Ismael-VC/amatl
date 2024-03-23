@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>tny</title>
+		<script src="tny.js"></script>
+		<link rel="stylesheet" href="editor.css">
+	</head>
+	<body class="toggle">
+		<div class="editor">
+				<div class="title">tny IDE</div>
+			<textarea
+				id="source"
+				autocorrect="off"
+				autocapitalize="off"
+				spellcheck="false"
+				placeholder="write code..."></textarea>
+			<div class="actions">
+				<button onclick="compile()">execute</button>
+			</div>
+		</div>
+		<div class="resizer"></div>
+		<div class="preview">
+			<details id="screen_wrapper" open>
+				<summary class="title">screen</summary>
+				<canvas id="screen" width="16" height="16" tabindex=1></canvas>
+			</details>
+			<details open>
+				<summary class="title">pstack</summary>
+				<div id="pstack"></div>
+			</details>
+			<details open>
+				<summary class="title">rstack</summary>
+				<div id="rstack"></div>
+			</details>
+			<details>
+				<summary class="title">buffer</summary>
+				<div id="buffer"></div>
+			</details>
+			<details>
+				<summary class="title">ram</summary>
+				<div id="ram"></div>
+			</details>
+			<details>
+				<summary class="title">rom</summary>
+				<div id="rom"></div>
+				<div id="share"></div>
+			</details>
+			<details open>
+				<summary class="title">errors</summary>
+				<div id="errors"></div>
+			</details>
+		</div>
+		<script src="editor.js"></script>
+		<script src="blit.js"></script>
+	</body>
+</html>

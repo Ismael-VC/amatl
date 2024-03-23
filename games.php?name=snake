@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+		<head>
+				<meta charset="utf-8">
+				<title>tny</title>
+				<link rel="stylesheet" href="style.css">
+		</head>
+		<body>
+				<header>
+						<a href="index.php"><h2>Tny</h2></a>
+						<nav>
+								<ul class="menu">
+										<li><a href="about.php">About</a></li>
+										<li><a href="tutorial.php">Tutorial</a></li>
+										<li><a href="reference.php">Reference</a></li>
+										<li><a href="https://sr.ht/~m15o/tny/">Download</a></li>
+										<li><a href="ide.html">Web IDE</a></li>
+										<li><a href="launcher.php">Launcher</a></li>
+										<li><a href="games.php">Games</a></li>
+								</ul>
+						</nav>
+				</header>
+				<main>
+		<script src="tny.js"></script>
+		<script>
+		 try {
+				 rom = msm.assemble(`@screen @ctrl
+LIT 74 LIT 0 STB
+LIT 73 LIT 1 STB
+LIT 72 LIT 2 STB
+BRK screen: FRM
+  LIT 6 MOD LIT 0 NEQ LIT @end JCN
+  CLS
+  LIT @len LDA move: DEC DUP
+    DEC LDB OVR STB
+    DUP LIT 1 GTH LIT @move JCN
+  POP
+  LIT dir: 1 LIT 0 LDB
+  OVR LIT 0 EQU LIT @up    JCR
+  OVR LIT 1 EQU LIT @right JCR
+  OVR LIT 2 EQU LIT @down  JCR
+  OVR LIT 3 EQU LIT @left  JCR
+  LIT 0 STB POP
+  LIT len: 3 draw: DEC DUP
+    LDB LIT 1 SET
+    DUP LIT 1 GTH LIT @draw JCN 
+  POP
+  LIT 0 LDB
+  DUP GET LIT @game_over JCN
+  LIT tar: 7a DUP LIT 1 SET
+  OVR EQU LIT @hit JCR
+  LIT 1 SET
+end: BRK
+hit: LIT @len LDA INC LIT @len STA RND LIT @tar STA RET
+right: INC RET
+left:  DEC RET
+down: LIT 10 ADD RET
+up:   LIT 10 SUB RET
+ctrl: KEY
+  LIT @dir LDA
+  OVR LIT 8 EQU LIT @right JCR
+  OVR LIT 4 EQU LIT @left  JCR
+  LIT 4 MOD LIT @dir STA POP
+BRK
+game_over: LIT 0 LIT 0 STA BRK`);
+				 console.log(rom);
+		 } catch(e) {
+				 errors.innerHTML = e.toString()
+		 }
+		</script>
+		<h1>snake</h1>
+		<p id="share"></p>
+		<table>
+				<tr>
+						<td>Name</td>
+						<td>snake</td>
+				</tr>
+				<tr>
+						<td>Author</td>
+						<td>m15o</td>
+				</tr>
+				<tr>
+						<td>Instructions</td>
+						<td>Use left and right arrows to move the snake.</td>
+				</tr>
+				<tr>
+						<td>Size</td>
+						<td id="size"></td>
+				</tr>
+				<tr>
+						<td>Source</td>
+						<td><pre><code>@screen @ctrl
+LIT 74 LIT 0 STB
+LIT 73 LIT 1 STB
+LIT 72 LIT 2 STB
+BRK screen: FRM
+  LIT 6 MOD LIT 0 NEQ LIT @end JCN
+  CLS
+  LIT @len LDA move: DEC DUP
+    DEC LDB OVR STB
+    DUP LIT 1 GTH LIT @move JCN
+  POP
+  LIT dir: 1 LIT 0 LDB
+  OVR LIT 0 EQU LIT @up    JCR
+  OVR LIT 1 EQU LIT @right JCR
+  OVR LIT 2 EQU LIT @down  JCR
+  OVR LIT 3 EQU LIT @left  JCR
+  LIT 0 STB POP
+  LIT len: 3 draw: DEC DUP
+    LDB LIT 1 SET
+    DUP LIT 1 GTH LIT @draw JCN 
+  POP
+  LIT 0 LDB
+  DUP GET LIT @game_over JCN
+  LIT tar: 7a DUP LIT 1 SET
+  OVR EQU LIT @hit JCR
+  LIT 1 SET
+end: BRK
+hit: LIT @len LDA INC LIT @len STA RND LIT @tar STA RET
+right: INC RET
+left:  DEC RET
+down: LIT 10 ADD RET
+up:   LIT 10 SUB RET
+ctrl: KEY
+  LIT @dir LDA
+  OVR LIT 8 EQU LIT @right JCR
+  OVR LIT 4 EQU LIT @left  JCR
+  LIT 4 MOD LIT @dir STA POP
+BRK
+game_over: LIT 0 LIT 0 STA BRK</code></pre></td>
+				</tr>
+		</table>
+
+		<script>
+		 document.getElementById("share").innerHTML = `<a href="emulator.php?r=${btoa(rom.map(e&#32;=&gt;&#32;String.fromCharCode(e)).join(''))}">play<a>`;
+
+		 const bytes = new Uint8Array(rom);
+		 const blob = new Blob([bytes], { type: 'application/octet-stream' });
+		 
+		 document.getElementById("share").innerHTML += `&nbsp;<a href="https://tny.m15o.net/${URL.createObjectURL(blob)}" download="snake.rom">download<a>`;
+
+		 document.getElementById("size").innerHTML = rom.length + " B";
+		</script>
+        </main>
+		</body>
+</html>
