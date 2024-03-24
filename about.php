@@ -2,7 +2,7 @@
 <html lang="en">
 		<head>
 				<meta charset="utf-8">
-				<title>tny</title>
+				<title>Amatl</title>
 				<link rel="stylesheet" href="style.css">
 		</head>
 		<body>
@@ -13,7 +13,7 @@
 										<li><a href="about.php">About</a></li>
 										<li><a href="tutorial.php">Tutorial</a></li>
 										<li><a href="reference.php">Reference</a></li>
-										<li><a href="https://sr.ht/~m15o/tny/">Download</a></li>
+										<li><a href="https://sr.ht/~m15o/Amatl/">Download</a></li>
 										<li><a href="ide.html">Web IDE</a></li>
 										<li><a href="launcher.php">Launcher</a></li>
 										<li><a href="games.php">Games</a></li>
@@ -28,7 +28,7 @@
 
 <p>So what's the point, you may ask?</p>
 
-<p>It makes writing games in machine code easier, and hopefully more fun too! Of course, your games will be quite, uh, limited. But hey, it's ok. There are other systems (such as <a href="https://100r.co/site/uxn.html">uxn</a>, from which tny takes most of its inspiration) that let you do advanced things.</p>
+<p>It makes writing games in machine code easier, and hopefully more fun too! Of course, your games will be quite, uh, limited. But hey, it's ok. There are other systems (such as <a href="https://100r.co/site/uxn.html">uxn</a>, from which Amatl takes most of its inspiration) that let you do advanced things.</p>
 
 <p>With such a limited instruction set and requirements, writing Tny emulators and assemblers is relatively simple, meaning it can get ported to many systems. Making it a fun learning project if you are interested to know more about lower level programming.</p>
 

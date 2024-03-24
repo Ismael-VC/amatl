@@ -2,7 +2,7 @@
 <html lang="en">
 		<head>
 				<meta charset="utf-8">
-				<title>tny</title>
+				<title>Amatl</title>
 				<link rel="stylesheet" href="style.css">
 		</head>
 		<body>
@@ -13,7 +13,7 @@
 										<li><a href="about.php">About</a></li>
 										<li><a href="tutorial.php">Tutorial</a></li>
 										<li><a href="reference.php">Reference</a></li>
-										<li><a href="https://sr.ht/~m15o/tny/">Download</a></li>
+										<li><a href="https://sr.ht/~m15o/Amatl/">Download</a></li>
 										<li><a href="ide.html">Web IDE</a></li>
 										<li><a href="launcher.php">Launcher</a></li>
 										<li><a href="games.php">Games</a></li>
@@ -22,7 +22,7 @@
 				</header>
 				<main>
 
-<h1><img src="logo.png" alt="tny"></h1>
+<h1><img src="logo.png" alt="Amatl"></h1>
 <p>Tny is a little virtual console inspired by <a href="https://100r.co/site/uxn.html">uxn</a>. It has a very limited set of <a href="reference.php#instructions">instructions</a>, 256 bytes of RAM, and a 16x16 screen. It's a fun playground to create little games and programs. Go ahead and start browsing <a href="games.php">games</a>!</p>
 
 <section>
@@ -39,7 +39,7 @@
 		</article>
 </section>
 
-<p><a href="https://journal.miso.town/atom?url=https://tny.m15o.net>"><img src="https://journal.miso.town/static/banner-htmlj.png"></a></p>
+<p><a href="https://journal.miso.town/atom?url=https://Amatl.m15o.net>"><img src="https://journal.miso.town/static/banner-htmlj.png"></a></p>
 
         </main>
 		</body>

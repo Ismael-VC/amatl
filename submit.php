@@ -2,7 +2,7 @@
 <html lang="en">
 		<head>
 				<meta charset="utf-8">
-				<title>tny</title>
+				<title>Amatl</title>
 				<link rel="stylesheet" href="style.css">
 		</head>
 		<body>
@@ -13,7 +13,7 @@
 										<li><a href="about.php">About</a></li>
 										<li><a href="tutorial.php">Tutorial</a></li>
 										<li><a href="reference.php">Reference</a></li>
-										<li><a href="https://sr.ht/~m15o/tny/">Download</a></li>
+										<li><a href="https://sr.ht/~m15o/Amatl/">Download</a></li>
 										<li><a href="ide.html">Web IDE</a></li>
 										<li><a href="launcher.php">Launcher</a></li>
 										<li><a href="games.php">Games</a></li>
@@ -23,7 +23,7 @@
 				<main>
 
 <h1>Submit a game</h1>
-<form action="https://riku.miso.town/submit?user_id=1&label=tny" method="post">
+<form action="https://riku.miso.town/submit?user_id=1&label=Amatl" method="post">
     <div class="field">
         <label for="email">Email</label>
         <input type="email" name="email" required>

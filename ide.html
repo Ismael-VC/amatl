@@ -1,21 +1,67 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>tny</title>
-		<script src="tny.js"></script>
+		<title>Amatl IDE</title>
+		<script src="amatl.js"></script>
 		<link rel="stylesheet" href="editor.css">
 	</head>
 	<body class="toggle">
 		<div class="editor">
-				<div class="title">tny IDE</div>
+				<div class="title">Amatl IDE</div>
 			<textarea
 				id="source"
 				autocorrect="off"
 				autocapitalize="off"
 				spellcheck="false"
-				placeholder="write code..."></textarea>
+				placeholder="write code...">( Click the "execute" button or Ctrl+Enter to run. )
+
+@Main ( -> ) [
+    \ set vectors
+    00 00
+
+    \ draw two horizontal lines
+    #bd #b2 ,line-x JSR
+    #dd #d2 ,line-x JSR
+
+    \ draw "t"
+    #74 #32 ,line-y JSR
+    #53 #01 SET
+    #83 #01 SET
+
+    \ draw "n"
+    #95 #55 ,line-y JSR
+    #46 #01 SET
+    #97 #47 ,line-y JSR
+
+    \ draw "y"
+    #79 #49 ,line-y JSR
+    #7b #4b ,line-y JSR
+    #7a #01 SET
+    #89 #01 SET
+
+    BRK
+]
+
+@line-x ( hi lo -- ) [
+    @loop-x
+      DUP #01 SET
+      INC OVR OVR GTH ,loop-x JCN
+    POP POP
+
+    JMPr
+]
+
+@line-y ( hi lo -- ) [
+    @loop-y
+      DUP #01 SET
+      #10 ADD OVR OVR GTH ,loop-y JCN
+    POP POP
+
+    JMPr
+]
+</textarea>
 			<div class="actions">
-				<button onclick="compile()">execute</button>
+				<button id="compile" onclick="compile()">execute</button>
 			</div>
 		</div>
 		<div class="resizer"></div>
@@ -25,8 +71,8 @@
 				<canvas id="screen" width="16" height="16" tabindex=1></canvas>
 			</details>
 			<details open>
-				<summary class="title">pstack</summary>
-				<div id="pstack"></div>
+				<summary class="title">wstack</summary>
+				<div id="wstack"></div>
 			</details>
 			<details open>
 				<summary class="title">rstack</summary>

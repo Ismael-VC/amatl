@@ -2,7 +2,7 @@
 <html lang="en">
 		<head>
 				<meta charset="utf-8">
-				<title>tny</title>
+				<title>Amatl</title>
 				<link rel="stylesheet" href="style.css">
 		</head>
 		<body>
@@ -13,7 +13,7 @@
 										<li><a href="about.php">About</a></li>
 										<li><a href="tutorial.php">Tutorial</a></li>
 										<li><a href="reference.php">Reference</a></li>
-										<li><a href="https://sr.ht/~m15o/tny/">Download</a></li>
+										<li><a href="https://sr.ht/~m15o/Amatl/">Download</a></li>
 										<li><a href="ide.html">Web IDE</a></li>
 										<li><a href="launcher.php">Launcher</a></li>
 										<li><a href="games.php">Games</a></li>
@@ -34,11 +34,11 @@
 
 <p>There is a lot going on in the above. Let's work through it. </p>
 
-<p>First, LIT is an instruction that tells Tny to push the next number into the parameter stack (pstack). The parameter stack is a special part of memory in which we can push or pop values. It's used to pass parameters, thus its name.</p>
+<p>First, LIT is an instruction that tells Tny to push the next number into the parameter stack (wstack). The parameter stack is a special part of memory in which we can push or pop values. It's used to pass parameters, thus its name.</p>
 
-<p>Then, INC is another instruction that increases by one the top of the pstack.</p>
+<p>Then, INC is another instruction that increases by one the top of the wstack.</p>
 
-<p>If you haven't done so, execute the above program. You should see that the pstack now has 02 stored in it.</p>
+<p>If you haven't done so, execute the above program. You should see that the wstack now has 02 stored in it.</p>
 
 <h3>Manipulating the stack</h3>
 
@@ -98,11 +98,11 @@ LIT 2</pre></p>
 
 <p>Let's try to understand what happens. When executed, the Instruction Pointer (IP) starts at address 2. It finds LIT, so it pushes the number that follows it into the stack. In this case, @start represents the memory address of the start label, which is 5. Our stack now has a 5 in it. Then it finds a JMP instruction. The JMP instruction tells the IP to take the value of the top of the stack, so 5, and to carry on. Our program then executes the LIT instructions, then the ADD one, and finally BRK. BRK is a special instruction that stops the execution of the program. Meaning that the remaining LIT 2 instruction won't be executed.</p>
 
-<p>There are different ways to jump. For example, JMR will store the position of the next instruction in a special stack called the return stack. This allows to resume the execution with the RET instruction.</p>
+<p>There are different ways to jump. For example, JSR will store the position of the next instruction in a special stack called the return stack. This allows to resume the execution with the JMPr instruction.</p>
 
 <h3>Drawing on the screen</h3>
 
-<p>The screen tny is 16x16, meaning that a screen position can be encoded in one byte. The address of the top left pixel is 00, and the address of the bottom right if ff. The high nibble represents the rows, and the low nibble the columns. For example, the pixel at the 4th row and 10th column is 4a.</p>
+<p>The screen Amatl is 16x16, meaning that a screen position can be encoded in one byte. The address of the top left pixel is 00, and the address of the bottom right if ff. The high nibble represents the rows, and the low nibble the columns. For example, the pixel at the 4th row and 10th column is 4a.</p>
 
 <p>A pixel can be either on or off.</p>
 

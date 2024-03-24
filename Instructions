@@ -1,0 +1,273 @@
+# Amatl Instructions
+
+* `a`:     address
+* `e`:     address end
+* `n`:     number
+* `?`:     flag (00 is false, non zero is true)
+* `i`:     index
+* `v`:     value
+* `c`:     control
+* `x y z`: parameters
+* `PC`:    program counter
+* `W`:     working/parameter stack
+* `R`:     return stack
+
+
+OPCODE	MNEMONIC	STACKS EFFECT					NAME										PURPOSE
+
+0x00	BRK			( )								Break
+0x01	JMP			( a -- )						Jump
+0x02	JMPk		( | -- | )
+0x03	JMPr		( | -- | )
+0x04	JMPkr		( | -- | )
+0x05	JCN			( ? a -- )						Jump conditional
+0x06	JCNk		( | -- | )
+0x07	JCNr		( | -- | )
+0x08	JCNkr		( | -- | )
+0x09	JSR			( a -- | PC )					Jump stash return
+0x0a	JSRk		( | -- | )
+0x0b	JSRr		( | -- | )
+0x0c	JSRkr		( | -- | )
+0x0d	LIT			( -- x )						Push literal
+0x0e	LITr		( | -- | )
+0x0f	LIT2		( | -- | )
+0x10	LIT2r		( | -- | )
+0x11	TUK			( x y z -- x y z y )			Tuck
+0x12	TUKk		( | -- | )
+0x13	TUKr		( | -- | )
+0x14	TUKkr		( | -- | )
+0x15	TUK2		( | -- | )
+0x16	TUK2k		( | -- | )
+0x17	TUK2r		( | -- | )
+0x18	TUK2kr		( | -- | )
+0x19	INS			( v i -- W[i]=v )				Insert
+0x1a	INSk		( | -- | )
+0x1b	INSr		( | -- | )
+0x1c	INSkr		( | -- | )
+0x1d	INS2		( | -- | )
+0x1e	INS2k		( | -- | )
+0x1f	INS2r		( | -- | )
+0x20	INS2kr		( | -- | )
+0x21	POP			( x -- )						Pop
+0x22	POPr		( | -- | )
+0x23	POP2		( | -- | )
+0x24	POP2r		( | -- | )
+0x25	NIP			( x y z -- x z )				Nip
+0x26	NIPr		( | -- | )
+0x27	NIP2		( | -- | )
+0x28	NIP2r		( | -- | )
+0x29	REM			( i -- del(W[i]) )				Remove
+0x2a	REMk		( | -- | )
+0x2b	REMr		( | -- | )
+0x2c	REMkr		( | -- | )
+0x2d	REM2		( | -- | )
+0x2e	REM2k		( | -- | )
+0x2f	REM2r		( | -- | )
+0x30	REM2kr		( | -- | )
+0x31	DUP			( x -- x x)						Duplicate
+0x32	DUPk		( | -- | )
+0x33	DUPr		( | -- | )
+0x34	DUPkr		( | -- | )
+0x35	DUP2		( | -- | )
+0x36	DUP2k		( | -- | )
+0x37	DUP2r		( | -- | )
+0x38	DUP2kr		( | -- | )
+0x39	OVR			( x y -- x y x )				Over
+0x3a	OVRk		( | -- | )
+0x3b	OVRr		( | -- | )
+0x3c	OVRkr		( | -- | )
+0x3d	OVR2		( | -- | )
+0x3e	OVR2k		( | -- | )
+0x3f	OVR2r		( | -- | )
+0x40	OVR2kr		( | -- | )
+0x41	PIK			( x i -- x W[i] )				Pick
+0x42	PIKk		( | -- | )
+0x43	PIKr		( | -- | )
+0x44	PIKkr		( | -- | )
+0x45	PIK2		( | -- | )
+0x46	PIK2k		( | -- | )
+0x47	PIK2r		( | -- | )
+0x48	PIK2kr		( | -- | )
+0x49	SWP			( x y -- y x )					Swap
+0x4a	SWPk		( | -- | )
+0x4b	SWPr		( | -- | )
+0x4c	SWPkr		( | -- | )
+0x4d	SWP2		( | -- | )
+0x4e	SWP2k		( | -- | )
+0x4f	SWP2r		( | -- | )
+0x50	SWP2kr		( | -- | )
+0x51	ROT			( x y z c -- [z y x][y z x] )	Rotate
+0x52	ROTk		( | -- | )
+0x53	ROTr		( | -- | )
+0x54	ROTkr		( | -- | )
+0x55	ROT2		( | -- | )
+0x56	ROT2k		( | -- | )
+0x57	ROT2r		( | -- | )
+0x58	ROT2kr		( | -- | )
+0x59	STH			( x | -- | x )					Stash
+0x5a	STHk		( | -- | )
+0x5b	STHr		( | -- | )
+0x5c	STHkr		( | -- | )
+0x5d	STH2		( | -- | )
+0x5e	STH2k		( | -- | )
+0x5f	STH2r		( | -- | )
+0x60	STH2kr		( | -- | )
+0x61	STW			( x | y z -- | y x z )			Stow
+0x62	STWk		( | -- | )
+0x63	STWr		( | -- | )
+0x64	STWkr		( | -- | )
+0x65	STW2		( | -- | )
+0x66	STW2k		( | -- | )
+0x67	STW2r		( | -- | )
+0x68	STW2kr		( | -- | )
+0x69	MOV			( v i | -- | R[i]=v )			Move
+0x6a	MOVk		( | -- | )
+0x6b	MOVr		( | -- | )
+0x6c	MOVkr		( | -- | )
+0x6d	MOV2		( | -- | )
+0x6e	MOV2k		( | -- | )
+0x6f	MOV2r		( | -- | )
+0x70	MOV2kr		( | -- | )
+0x71	LDA			( a -- v )						Load absolute
+0x72	LDAk		( | -- | )
+0x73	LDAr		( | -- | )
+0x74	LDAkr		( | -- | )
+0x75	LDA2		( | -- | )
+0x76	LDA2k		( | -- | )
+0x77	LDA2r		( | -- | )
+0x78	LDA2kr		( | -- | )
+0x79	STA			( v a -- )						Store absolute
+0x7a	STAk		( | -- | )
+0x7b	STAr		( | -- | )
+0x7c	STAkr		( | -- | )
+0x7d	STA2		( | -- | )
+0x7e	STA2k		( | -- | )
+0x7f	STA2r		( | -- | )
+0x80	STA2kr		( | -- | )
+0x81	LDB			( a -- v )						Load buffer
+0x82	LDBk		( | -- | )
+0x83	LDBr		( | -- | )
+0x84	LDBkr		( | -- | )
+0x85	LDB2		( | -- | )
+0x86	LDB2k		( | -- | )
+0x87	LDB2r		( | -- | )
+0x88	LDB2kr		( | -- | )
+0x89	STB			( v a -- )						Store buffer
+0x8a	STBk		( | -- | )
+0x8b	STBr		( | -- | )
+0x8c	STBkr		( | -- | )
+0x8d	STB2		( | -- | )
+0x8e	STB2k		( | -- | )
+0x8f	STB2r		( | -- | )
+0x90	STB2kr		( | -- | )
+0x91	INC			( x -- x+1 )					Increment
+0x92	INCk		( | -- | )
+0x93	INCr		( | -- | )
+0x94	INCkr		( | -- | )
+0x95	DEC			( x -- x-1 )					Decrement
+0x96	DECk		( | -- | )
+0x97	DECr		( | -- | )
+0x98	DECkr		( | -- | )
+0x99	EQU			( x y -- x==y )					Equal
+0x9a	EQUk		( | -- | )
+0x9b	EQUr		( | -- | )
+0x9c	EQUkr		( | -- | )
+0x9d	NEQ			( x y -- x != y )				Not equal
+0x9e	NEQk		( | -- | )
+0x9f	NEQr		( | -- | )
+0xa0	NEQkr		( | -- | )
+0xa1	GTH			( x y -- x>y )					Greater than
+0xa2	GTHk		( | -- | )
+0xa3	GTHr		( | -- | )
+0xa4	GTHkr		( | -- | )
+0xa5	LTH			( x y -- x<y )					Less than
+0xa6	LTHk		( | -- | )
+0xa7	LTHr		( | -- | )
+0xa8	LTHkr		( | -- | )
+0xa9	GTE			( x y -- x>=y )					Greater than or equal
+0xaa	GTEk		( | -- | )
+0xab	GTEr		( | -- | )
+0xac	GTEkr		( | -- | )
+0xad	LTE			( x y -- x<=y )					Less than or equal
+0xae	LTEk		( | -- | )
+0xaf	LTEr		( | -- | )
+0xb0	LTEkr		( | -- | )
+0xb1	MIN			( 00 01 -- 00 )					Minimum
+0xb2	MINk		( | -- | )
+0xb3	MINr		( | -- | )
+0xb4	MINkr		( | -- | )
+0xb5	MAX			( 00 01 -- 01 )					Maximum
+0xb6	MAXk		( | -- | )
+0xb7	MAXr		( | -- | )
+0xb8	MAXkr		( | -- | )
+0xb9	ADD			( x y -- x+y )					Addition
+0xba	ADDk		( | -- | )
+0xbb	ADDr		( | -- | )
+0xbc	ADDkr		( | -- | )
+0xbd	SUB			( x y -- x-y )					Subtraction
+0xbe	SUBk		( | -- | )
+0xbf	SUBr		( | -- | )
+0xc0	SUBkr		( | -- | )
+0xc1	DIV			( x y -- x/y )					Division
+0xc2	DIVk		( | -- | )
+0xc3	DIVr		( | -- | )
+0xc4	DIVkr		( | -- | )
+0xc5	MUL			( x y -- x*y )					Multiplication
+0xc6	MULk		( | -- | )
+0xc7	MULr		( | -- | )
+0xc8	MULkr		( | -- | )
+0xc9	EXP			( x y -- x**y )					Exponentiation
+0xca	EXPk		( | -- | )
+0xcb	EXPr		( | -- | )
+0xcc	EXPkr		( | -- | )
+0xcd	MOD			( x y -- x%y )					Modulus
+0xce	MODk		( | -- | )
+0xcf	MODr		( | -- | )
+0xd0	MODkr		( | -- | )
+0xd1	EOR			( x y -- x^y )					Bit wise exclusive OR
+0xd2	EORk		( | -- | )
+0xd3	EORr		( | -- | )
+0xd4	EORkr		( | -- | )
+0xd5	ORA			( x y -- [x|y] )				Bit wise OR
+0xd6	ORAk		( | -- | )
+0xd7	ORAr		( | -- | )
+0xd8	ORAkr		( | -- | )
+0xd9	AND			( x y -- x&y )					Bit wise AND
+0xda	ANDk		( | -- | )
+0xdb	ANDr		( | -- | )
+0xdc	ANDkr		( | -- | )
+0xdd	NOT			( ? -- !? )						Logical NOT
+0xde	NOTk		( | -- | )
+0xdf	NOTr		( | -- | )
+0xe0	NOTkr		( | -- | )
+0xe1	SFT			( x c -- [x<<n][x>>n] )			Shift
+0xe2	SFTk		( | -- | )
+0xe3	SFTr		( | -- | )
+0xe4	SFTkr		( | -- | )
+0xe5	INV			( x -- ~x )						Bit wise NOT
+0xe6	INVk		( | -- | )
+0xe7	INVr		( | -- | )
+0xe8	INVkr		( | -- | )
+0xe9	FND			( a e v -- i )					Find first
+0xea	FNDk		( | -- | )
+0xeb	FNDr		( | -- | )
+0xec	FNDkr		( | -- | )
+0xed	CNT			( a e v -- n )					Count
+0xee	CNTk		( | -- | )
+0xef	CNTr		( | -- | )
+0xf0	CNTkr		( | -- | )
+0xf1	GET			( x -- v )						Get pixel color state/character value
+0xf2	GETk		( | -- | )
+0xf3	GETr		( | -- | )
+0xf4	GETkr		( | -- | )
+0xf5	SET			( v a -- )						Set pixel color state/character value
+0xf6	SETk		( | -- | )
+0xf7	SETr		( | -- | )
+0xf8	SETkr		( | -- | )
+0xf9	RND			( -- n )						Random
+0xfa	KEY			( -- v )						Key input
+0xfb	FIL			( a e v -- )					Fill
+0xfc	CPY			( a1 a2 c n -- )				Copy
+0xfd	DEP			( -- n )						Stack depth
+0xfe	DEPr		( | -- | )
+0xff	HLT			( -- )							Halt

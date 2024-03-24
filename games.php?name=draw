@@ -2,7 +2,7 @@
 <html lang="en">
 		<head>
 				<meta charset="utf-8">
-				<title>tny</title>
+				<title>Amatl</title>
 				<link rel="stylesheet" href="style.css">
 		</head>
 		<body>
@@ -13,7 +13,7 @@
 										<li><a href="about.php">About</a></li>
 										<li><a href="tutorial.php">Tutorial</a></li>
 										<li><a href="reference.php">Reference</a></li>
-										<li><a href="https://sr.ht/~m15o/tny/">Download</a></li>
+										<li><a href="https://sr.ht/~m15o/Amatl/">Download</a></li>
 										<li><a href="ide.html">Web IDE</a></li>
 										<li><a href="launcher.php">Launcher</a></li>
 										<li><a href="games.php">Games</a></li>
@@ -21,7 +21,7 @@
 						</nav>
 				</header>
 				<main>
-		<script src="tny.js"></script>
+		<script src="amatl.js"></script>
 		<script>
 		 try {
 				 rom = msm.assemble(`@screen @ctrl
@@ -49,12 +49,12 @@ ctrl:
   KEY LIT 20 AND LIT @keyb  JCR
 BRK
 
-up:    LIT @pos LDA LIT 10 SUB LIT @pos STA RET
-down:  LIT @pos LDA LIT 10 ADD LIT @pos STA RET
-left:  LIT @pos LDA DEC LIT @pos STA RET
-right: LIT @pos LDA INC LIT @pos STA RET
-keya:  LIT 1 LIT @pos LDA STB RET
-keyb:  LIT 0 LIT @pos LDA STB RET`);
+up:    LIT @pos LDA LIT 10 SUB LIT @pos STA JMPr
+down:  LIT @pos LDA LIT 10 ADD LIT @pos STA JMPr
+left:  LIT @pos LDA DEC LIT @pos STA JMPr
+right: LIT @pos LDA INC LIT @pos STA JMPr
+keya:  LIT 1 LIT @pos LDA STB JMPr
+keyb:  LIT 0 LIT @pos LDA STB JMPr`);
 				 console.log(rom);
 		 } catch(e) {
 				 errors.innerHTML = e.toString()
@@ -106,12 +106,12 @@ ctrl:
   KEY LIT 20 AND LIT @keyb  JCR
 BRK
 
-up:    LIT @pos LDA LIT 10 SUB LIT @pos STA RET
-down:  LIT @pos LDA LIT 10 ADD LIT @pos STA RET
-left:  LIT @pos LDA DEC LIT @pos STA RET
-right: LIT @pos LDA INC LIT @pos STA RET
-keya:  LIT 1 LIT @pos LDA STB RET
-keyb:  LIT 0 LIT @pos LDA STB RET</code></pre></td>
+up:    LIT @pos LDA LIT 10 SUB LIT @pos STA JMPr
+down:  LIT @pos LDA LIT 10 ADD LIT @pos STA JMPr
+left:  LIT @pos LDA DEC LIT @pos STA JMPr
+right: LIT @pos LDA INC LIT @pos STA JMPr
+keya:  LIT 1 LIT @pos LDA STB JMPr
+keyb:  LIT 0 LIT @pos LDA STB JMPr</code></pre></td>
 				</tr>
 		</table>
 
@@ -121,7 +121,7 @@ keyb:  LIT 0 LIT @pos LDA STB RET</code></pre></td>
 		 const bytes = new Uint8Array(rom);
 		 const blob = new Blob([bytes], { type: 'application/octet-stream' });
 		 
-		 document.getElementById("share").innerHTML += `&nbsp;<a href="https://tny.m15o.net/${URL.createObjectURL(blob)}" download="draw.rom">download<a>`;
+		 document.getElementById("share").innerHTML += `&nbsp;<a href="https://Amatl.m15o.net/${URL.createObjectURL(blob)}" download="draw.rom">download<a>`;
 
 		 document.getElementById("size").innerHTML = rom.length + " B";
 		</script>

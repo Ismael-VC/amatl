@@ -2,7 +2,7 @@
 <html lang="en">
 		<head>
 				<meta charset="utf-8">
-				<title>tny</title>
+				<title>Amatl</title>
 				<link rel="stylesheet" href="style.css">
 		</head>
 		<body>
@@ -13,7 +13,7 @@
 										<li><a href="about.php">About</a></li>
 										<li><a href="tutorial.php">Tutorial</a></li>
 										<li><a href="reference.php">Reference</a></li>
-										<li><a href="https://sr.ht/~m15o/tny/">Download</a></li>
+										<li><a href="https://sr.ht/~m15o/Amatl/">Download</a></li>
 										<li><a href="ide.html">Web IDE</a></li>
 										<li><a href="launcher.php">Launcher</a></li>
 										<li><a href="games.php">Games</a></li>
@@ -21,7 +21,7 @@
 						</nav>
 				</header>
 				<main>
-		<script src="tny.js"></script>
+		<script src="amatl.js"></script>
 		<script>
 		 try {
 				 rom = msm.assemble(`# This program shows how to draw sprites.
@@ -33,18 +33,18 @@
 
 0 0
 LIT 52
-DUP LIT @t LIT @draw JMR
-DUP LIT 4 ADD LIT @n LIT @draw JMR
-DUP LIT 8 ADD LIT @y LIT @draw JMR
+DUP LIT @t LIT @draw JSR
+DUP LIT 4 ADD LIT @n LIT @draw JSR
+DUP LIT 8 ADD LIT @y LIT @draw JSR
 POP
 BRK
 
 draw: # pos adr
   OVR OVR
-  LDA LIT @sprite JMR
+  LDA LIT @sprite JSR
   SWP LIT 20 ADD SWP
-  INC LDA LIT @sprite JMR
-RET
+  INC LDA LIT @sprite JSR
+JMPr
   
 sprite: # pos n --
   LIT 0 LIT 8 PSH PSH do:
@@ -56,7 +56,7 @@ sprite: # pos n --
     PUL INC PSH
     RSI RSJ LTH LIT @do JCN
   PUL PUL POP POP POP POP
-RET
+JMPr
 
 t: 46 42
 n: 6a aa
@@ -79,7 +79,7 @@ y: aa 48`);
 				</tr>
 				<tr>
 						<td>Instructions</td>
-						<td>Display tny on the screen</td>
+						<td>Display Amatl on the screen</td>
 				</tr>
 				<tr>
 						<td>Size</td>
@@ -96,18 +96,18 @@ y: aa 48`);
 
 0 0
 LIT 52
-DUP LIT @t LIT @draw JMR
-DUP LIT 4 ADD LIT @n LIT @draw JMR
-DUP LIT 8 ADD LIT @y LIT @draw JMR
+DUP LIT @t LIT @draw JSR
+DUP LIT 4 ADD LIT @n LIT @draw JSR
+DUP LIT 8 ADD LIT @y LIT @draw JSR
 POP
 BRK
 
 draw: # pos adr
   OVR OVR
-  LDA LIT @sprite JMR
+  LDA LIT @sprite JSR
   SWP LIT 20 ADD SWP
-  INC LDA LIT @sprite JMR
-RET
+  INC LDA LIT @sprite JSR
+JMPr
   
 sprite: # pos n --
   LIT 0 LIT 8 PSH PSH do:
@@ -119,7 +119,7 @@ sprite: # pos n --
     PUL INC PSH
     RSI RSJ LTH LIT @do JCN
   PUL PUL POP POP POP POP
-RET
+JMPr
 
 t: 46 42
 n: 6a aa
@@ -133,7 +133,7 @@ y: aa 48</code></pre></td>
 		 const bytes = new Uint8Array(rom);
 		 const blob = new Blob([bytes], { type: 'application/octet-stream' });
 		 
-		 document.getElementById("share").innerHTML += `&nbsp;<a href="https://tny.m15o.net/${URL.createObjectURL(blob)}" download="sprite.rom">download<a>`;
+		 document.getElementById("share").innerHTML += `&nbsp;<a href="https://Amatl.m15o.net/${URL.createObjectURL(blob)}" download="sprite.rom">download<a>`;
 
 		 document.getElementById("size").innerHTML = rom.length + " B";
 		</script>

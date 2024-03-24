@@ -2,7 +2,7 @@
 <html lang="en">
 		<head>
 				<meta charset="utf-8">
-				<title>tny</title>
+				<title>Amatl</title>
 				<link rel="stylesheet" href="style.css">
 		</head>
 		<body>
@@ -13,7 +13,7 @@
 										<li><a href="about.php">About</a></li>
 										<li><a href="tutorial.php">Tutorial</a></li>
 										<li><a href="reference.php">Reference</a></li>
-										<li><a href="https://sr.ht/~m15o/tny/">Download</a></li>
+										<li><a href="https://sr.ht/~m15o/Amatl/">Download</a></li>
 										<li><a href="ide.html">Web IDE</a></li>
 										<li><a href="launcher.php">Launcher</a></li>
 										<li><a href="games.php">Games</a></li>
@@ -21,7 +21,7 @@
 						</nav>
 				</header>
 				<main>
-		<script src="tny.js"></script>
+		<script src="amatl.js"></script>
 		<script>
 		 try {
 				 rom = msm.assemble(`@screen @ctrl
@@ -51,11 +51,11 @@ BRK screen: FRM
   OVR EQU LIT @hit JCR
   LIT 1 SET
 end: BRK
-hit: LIT @len LDA INC LIT @len STA RND LIT @tar STA RET
-right: INC RET
-left:  DEC RET
-down: LIT 10 ADD RET
-up:   LIT 10 SUB RET
+hit: LIT @len LDA INC LIT @len STA RND LIT @tar STA JMPr
+right: INC JMPr
+left:  DEC JMPr
+down: LIT 10 ADD JMPr
+up:   LIT 10 SUB JMPr
 ctrl: KEY
   LIT @dir LDA
   OVR LIT 8 EQU LIT @right JCR
@@ -116,11 +116,11 @@ BRK screen: FRM
   OVR EQU LIT @hit JCR
   LIT 1 SET
 end: BRK
-hit: LIT @len LDA INC LIT @len STA RND LIT @tar STA RET
-right: INC RET
-left:  DEC RET
-down: LIT 10 ADD RET
-up:   LIT 10 SUB RET
+hit: LIT @len LDA INC LIT @len STA RND LIT @tar STA JMPr
+right: INC JMPr
+left:  DEC JMPr
+down: LIT 10 ADD JMPr
+up:   LIT 10 SUB JMPr
 ctrl: KEY
   LIT @dir LDA
   OVR LIT 8 EQU LIT @right JCR
@@ -137,7 +137,7 @@ game_over: LIT 0 LIT 0 STA BRK</code></pre></td>
 		 const bytes = new Uint8Array(rom);
 		 const blob = new Blob([bytes], { type: 'application/octet-stream' });
 		 
-		 document.getElementById("share").innerHTML += `&nbsp;<a href="https://tny.m15o.net/${URL.createObjectURL(blob)}" download="snake.rom">download<a>`;
+		 document.getElementById("share").innerHTML += `&nbsp;<a href="https://Amatl.m15o.net/${URL.createObjectURL(blob)}" download="snake.rom">download<a>`;
 
 		 document.getElementById("size").innerHTML = rom.length + " B";
 		</script>

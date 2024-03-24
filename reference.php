@@ -2,7 +2,7 @@
 <html lang="en">
 		<head>
 				<meta charset="utf-8">
-				<title>tny</title>
+				<title>Amatl</title>
 				<link rel="stylesheet" href="style.css">
 		</head>
 		<body>
@@ -13,7 +13,7 @@
 										<li><a href="about.php">About</a></li>
 										<li><a href="tutorial.php">Tutorial</a></li>
 										<li><a href="reference.php">Reference</a></li>
-										<li><a href="https://sr.ht/~m15o/tny/">Download</a></li>
+										<li><a href="https://sr.ht/~m15o/Amatl/">Download</a></li>
 										<li><a href="ide.html">Web IDE</a></li>
 										<li><a href="launcher.php">Launcher</a></li>
 										<li><a href="games.php">Games</a></li>
@@ -28,7 +28,7 @@
 <ul>
 		<li>256 bytes of RAM</li>
 		<li>A 256 bytes general purpose buffer</li>
-		<li>Two 256 bytes stacks: pstack and rstack</li>
+		<li>Two 256 bytes stacks: wstack and rstack</li>
 		<li>A 16x16 pixels (32 bytes) screen</li>
 		<li>3 bytes that store the state:</li>
 		<ul>
@@ -69,7 +69,7 @@
 				</tr>
 						<tr>
 						<td>0x01</td>
-						<td>RET</td>
+						<td>JMPr</td>
 						<td></td>
 						<td>Pop rstack into IP</td>
 				</tr>
@@ -81,7 +81,7 @@
 				</tr>
 						<tr>
 						<td>0x03</td>
-						<td>JMR</td>
+						<td>JSR</td>
 						<td>a</td>
 						<td>Push IP+1 to rstack, then JMP</td>
 				</tr>
@@ -137,13 +137,13 @@
 						<td>0x0c</td>
 						<td>PSH</td>
 						<td>n --</td>
-						<td>Take value off pstack and push it to rstack</td>
+						<td>Take value off wstack and push it to rstack</td>
 				</tr>
 						<tr>
 						<td>0x0d</td>
 						<td>PUL</td>
 						<td>-- n</td>
-						<td>Pull value off rstack and push it to pstack</td>
+						<td>Pull value off rstack and push it to wstack</td>
 				</tr>
 						<tr>
 						<td>0x0e</td>
@@ -299,13 +299,13 @@
 						<td>0x27</td>
 						<td>KEY</td>
 						<td>k</td>
-						<td>Push the value of the controller to the pstack</td>
+						<td>Push the value of the controller to the wstack</td>
 				</tr>
 						<tr>
 						<td>0x28</td>
 						<td>FRM</td>
 						<td>f</td>
-						<td>Push the value of the current frame to the pstack</td>
+						<td>Push the value of the current frame to the wstack</td>
 				</tr>
 		</table>
 

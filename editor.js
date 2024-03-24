@@ -23,6 +23,13 @@ document.addEventListener('mouseup', (e) => {
 	isResizing = false;
 });
 
+document.addEventListener('keydown', function(event) {
+    if (event.ctrlKey && event.key === 'Enter') {
+        // Trigger your button's click event here
+        document.getElementById('compile').click();
+    }
+});
+
 let rom = [];
 function compile() {
 		errors.innerHTML = '';
@@ -70,7 +77,7 @@ function display_share() {
 }
 
 function display_stack() {
-		display_cells("pstack", msm.pstack);
+		display_cells("wstack", msm.wstack);
 		display_cells("rstack", msm.rstack);
 }
 

@@ -29,8 +29,8 @@
 				CLS: 36,
 				SET: 37,
 				EQU: 28,
-				RET: 1,
-				JMR: 3,
+				JMPr: 1,
+				JSR: 3,
 				RND: 27,
 				NEQ: 29,
 				GET: 38,
@@ -65,7 +65,7 @@
 		let btn = 0;
 
 		// parameter stack
-		const pstack = [];
+		const wstack = [];
 
 		// return stack
 		const rstack = [];
@@ -105,62 +105,62 @@
 						exit = 1;
 						break;
 				case mn.LIT:
-						push(pstack, memory[++h])
+						push(wstack, memory[++h])
 						h++;
 						break;
 				case mn.JMP:
-						h = pop(pstack)
+						h = pop(wstack)
 						break;
-				case mn.JMR:
+				case mn.JSR:
 						push(rstack, h+1);
-						h = pop(pstack)
+						h = pop(wstack)
 						break;
-				case mn.RET:
+				case mn.JMPr:
 						h = pop(rstack)
 						break;
 				case mn.NOT:
-						n = pop(pstack);
-						push(pstack, n? 0 : 1);
+						n = pop(wstack);
+						push(wstack, n? 0 : 1);
 						h++;
 						break;
 				case mn.SET:
-						n = pop(pstack);
-						n2 = pop(pstack);
+						n = pop(wstack);
+						n2 = pop(wstack);
 						screen[n2] = n == 0 ? 0 : 1;
 						h++;
 						break;
 				case mn.KEY:
-						push(pstack, keyp);
+						push(wstack, keyp);
 						h++;
 						break;
 				case mn.FRM:
-						push(pstack, frame);
+						push(wstack, frame);
 						h++;
 						break;
 				case mn.LDA:
-						adr = pop(pstack);
-						push(pstack, memory[adr]);
+						adr = pop(wstack);
+						push(wstack, memory[adr]);
 						h++;
 						break;
 				case mn.LDB:
-						adr = pop(pstack);
-						push(pstack, buffer[adr]);
+						adr = pop(wstack);
+						push(wstack, buffer[adr]);
 						h++;
 						break;
 				case mn.GET:
-						adr = pop(pstack);
-						push(pstack, screen[adr]);
+						adr = pop(wstack);
+						push(wstack, screen[adr]);
 						h++;
 						break;
 				case mn.STA:
-						adr = pop(pstack);
-						n = pop(pstack);
+						adr = pop(wstack);
+						n = pop(wstack);
 						memory[adr] = n;
 						h++;
 						break;
 				case mn.STB:
-						adr = pop(pstack);
-						n = pop(pstack);
+						adr = pop(wstack);
+						n = pop(wstack);
 						buffer[adr] = n;
 						h++;
 						break;
@@ -169,16 +169,16 @@
 						h++;
 						break;
 				case mn.RND:
-						push(pstack, Math.floor(Math.random() * 256));
+						push(wstack, Math.floor(Math.random() * 256));
 						h++
 						break;
 				case mn.POP:
-						pop(pstack);
+						pop(wstack);
 						h++;
 						break;
 				case mn.JCN:
-						adr = pop(pstack);
-						n = pop(pstack);
+						adr = pop(wstack);
+						n = pop(wstack);
 						if (n) {
 								h = adr;
 						} else {
@@ -186,48 +186,48 @@
 						}
 						break;
 				case mn.MOD:
-						n2 = pop(pstack);
-						n  = pop(pstack);
-						push(pstack, n%n2)
+						n2 = pop(wstack);
+						n  = pop(wstack);
+						push(wstack, n%n2)
 						h++;
 						break;
 				case mn.ADD:
-						n2 = pop(pstack);
-						n  = pop(pstack);
-						push(pstack, (n+n2)&0xFF);
+						n2 = pop(wstack);
+						n  = pop(wstack);
+						push(wstack, (n+n2)&0xFF);
 						h++;
 						break;
 				case mn.SUB:
-						n2 = pop(pstack);
-						n  = pop(pstack);
-						push(pstack, (n-n2)&0xFF);
+						n2 = pop(wstack);
+						n  = pop(wstack);
+						push(wstack, (n-n2)&0xFF);
 						h++;
 						break;
 				case mn.INC:
-						n  = pop(pstack);
-						push(pstack, (n+1)&0xFF)
+						n  = pop(wstack);
+						push(wstack, (n+1)&0xFF)
 						h++;
 						break;
 				case mn.DEC:
-						n  = pop(pstack);
-						push(pstack, (n-1)&0xFF);
+						n  = pop(wstack);
+						push(wstack, (n-1)&0xFF);
 						h++;
 						break;
 				case mn.DIV:
-						n2 = pop(pstack);
-						n  = pop(pstack);
-						push(pstack, Math.floor(n/n2))
+						n2 = pop(wstack);
+						n  = pop(wstack);
+						push(wstack, Math.floor(n/n2))
 						h++;
 						break;
 				case mn.MUL:
-						n2 = pop(pstack);
-						n  = pop(pstack);
-						push(pstack, n*n2)
+						n2 = pop(wstack);
+						n  = pop(wstack);
+						push(wstack, n*n2)
 						h++;
 						break;
 				case mn.JCR:
-						adr = pop(pstack);
-						n = pop(pstack);
+						adr = pop(wstack);
+						n = pop(wstack);
 						if (n) {
 								push(rstack, h+1)
 								h = adr;
@@ -236,99 +236,99 @@
 						}
 						break;
 				case mn.DUP:
-						n = pop(pstack);
-						push(pstack, n);
-						push(pstack, n);
+						n = pop(wstack);
+						push(wstack, n);
+						push(wstack, n);
 						h++;
 						break;
 				case mn.AND:
-						n = pop(pstack);
-						n2 = pop(pstack);
-						push(pstack, n2 & n);
+						n = pop(wstack);
+						n2 = pop(wstack);
+						push(wstack, n2 & n);
 						h++;
 						break;
 				case mn.ORR:
-						n = pop(pstack);
-						n2 = pop(pstack);
-						push(pstack, n2 | n);
+						n = pop(wstack);
+						n2 = pop(wstack);
+						push(wstack, n2 | n);
 						h++;
 						break;
 				case mn.SFT:
-						n = pop(pstack);
-						n2 = pop(pstack);
+						n = pop(wstack);
+						n2 = pop(wstack);
 						n3 = n2 >> (n&0x0f)
 						n3 = n3 << ((n&0xf0) >> 4)
-						push(pstack, n3);
+						push(wstack, n3);
 						h++;
 						break;
 				case mn.XOR:
-						n = pop(pstack);
-						n2 = pop(pstack);
-						push(pstack, n2 ^ n);
+						n = pop(wstack);
+						n2 = pop(wstack);
+						push(wstack, n2 ^ n);
 						h++;
 						break;
 				case mn.EQU:
-						n = pop(pstack);
-						n2 = pop(pstack);
-						push(pstack, n === n2 ? 1 : 0);
+						n = pop(wstack);
+						n2 = pop(wstack);
+						push(wstack, n === n2 ? 1 : 0);
 						h++;
 						break;
 				case mn.GTH:
-						n2 = pop(pstack);
-						n = pop(pstack);
-						push(pstack, n > n2 ? 1 : 0);
+						n2 = pop(wstack);
+						n = pop(wstack);
+						push(wstack, n > n2 ? 1 : 0);
 						h++;
 						break;
 				case mn.LTH:
-						n2 = pop(pstack);
-						n = pop(pstack);
-						push(pstack, n < n2 ? 1 : 0);
+						n2 = pop(wstack);
+						n = pop(wstack);
+						push(wstack, n < n2 ? 1 : 0);
 						h++;
 						break;
 				case mn.NEQ:
-						n = pop(pstack);
-						n2 = pop(pstack);
-						push(pstack, n !== n2 ? 1 : 0);
+						n = pop(wstack);
+						n2 = pop(wstack);
+						push(wstack, n !== n2 ? 1 : 0);
 						h++;
 						break;
 				case mn.SWP:
-						n2 = pop(pstack);
-						n = pop(pstack);
-						push(pstack, n2);
-						push(pstack, n);
+						n2 = pop(wstack);
+						n = pop(wstack);
+						push(wstack, n2);
+						push(wstack, n);
 						h++;
 						break;
 				case mn.ROT:
-						n3 = pop(pstack);
-						n2 = pop(pstack);
-						n = pop(pstack);
-						push(pstack, n2);
-						push(pstack, n3);
-						push(pstack, n);
+						n3 = pop(wstack);
+						n2 = pop(wstack);
+						n = pop(wstack);
+						push(wstack, n2);
+						push(wstack, n3);
+						push(wstack, n);
 						h++
 						break;
 				case mn.OVR:
-						n2 = pop(pstack);
-						n = pop(pstack);
-						push(pstack, n);
-						push(pstack, n2);
-						push(pstack, n);
+						n2 = pop(wstack);
+						n = pop(wstack);
+						push(wstack, n);
+						push(wstack, n2);
+						push(wstack, n);
 						h++
 						break;
 				case mn.PSH:
-						n = pop(pstack);
+						n = pop(wstack);
 						push(rstack, n);
 						h++
 						break;
 				case mn.PUL:
 						n = pop(rstack);
-						push(pstack, n);
+						push(wstack, n);
 						h++
 						break;
 				case mn.RSI:
 						n = pop(rstack);
 						push(rstack, n);
-						push(pstack, n);
+						push(wstack, n);
 						h++
 						break;
 				case mn.RSJ:
@@ -336,7 +336,7 @@
 						n = pop(rstack);
 						push(rstack, n);
 						push(rstack, n2);
-						push(pstack, n);
+						push(wstack, n);
 						h++
 						break;
 				default:
@@ -360,7 +360,7 @@
 				frame = 0;
 
 				// reset stacks
-				pstack.length = 0;
+				wstack.length = 0;
 				rstack.length = 0;
 		}
 
@@ -388,7 +388,7 @@
 				exit = 0;
 				h = memory[0];
 				if (!h) return;
-				// push(pstack, frame);
+				// push(wstack, frame);
 				while (!exit) {
 						exec();
 				}
@@ -399,7 +399,7 @@
 				exit = 0;
 				h = memory[1];
 				if (!h) return;
-				// push(pstack, keyp);
+				// push(wstack, keyp);
 				while (!exit) {
 						exec();
 				}
@@ -411,8 +411,8 @@
 
 				// capture labels
 				for (let i = 0; i < tokens.length; i++) {
-						if (tokens[i].endsWith(':')) {
-								labels[tokens[i].split(':')[0]] = j;
+						if (tokens[i].startsWith('@')) {
+								labels[tokens[i].split('@')[1]] = j;
 								tokens[i] = ''; // consume
 						} else {
 								j++;
@@ -423,7 +423,7 @@
 				try {
 						// substitute them
 						for (i = 0; i < tokens.length; i++) {
-								if (tokens[i].startsWith('@')) {
+								if (tokens[i].startsWith(',')) {
 										tokens[i] = (labels[tokens[i].slice(1)]).toString(16);
 								}
 						}
@@ -444,17 +444,27 @@
 
 		function assemble(str) {
 				let tokens = str
-						.replace(/\#.*/mg, '')
+				        .replace(/#(0*[0-9a-f]+)/g, 'LIT $1')
+				        .replace(/[\[\]]/g, '')
+                        .replace(/,(?!:)(\w+)/g, 'LIT ,$1')
+						.replace(/\\.*/mg, '')
+				        .replace(/\(\s*[^)]*\s*\)/mg, '')
 						.split(/\s+/)
 						.filter(Boolean);
 				tokens = preprocess(tokens);
+
+				console.log(`Used: ${(tokens.length/256*100).toFixed(2)}%`);
+
 				return tokens.map(m => {
 						if (mn[m] !== undefined) return mn[m];
-						let n = parseInt(m, 16);
-						if (isNaN(n)) {
-								throw new Error("Not a number: " + m);
-						}
+						let hex = /^[0-9a-f]{2}$/g;
+						if (hex.test(m)) {
+							let n = parseInt(m, 16);
+							if (isNaN(n)) {
+									throw new Error("Not a valid hex literal: " + m);
+							}
 						return n;
+						}
 				});
 		}
 
@@ -469,7 +479,7 @@
 				memory,
 				exec_screen_vector,
 				exec_key_vector,
-				pstack,
+				wstack,
 				rstack,
 				on_executed: f => on_executed = f,
 				screen_ready: f => screen_ready = f,

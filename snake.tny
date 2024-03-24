@@ -1,0 +1,74 @@
+Vectors:
+    @screen @ctrl
+
+Main:
+    LIT 74 LIT 0 STB
+    LIT 73 LIT 1 STB
+    LIT 72 LIT 2 STB
+BRK 
+
+screen: 
+    FRM
+    LIT 6 MOD LIT 0 NEQ LIT @end JCN
+        CLS
+
+    LIT @len LDA 
+    move: 
+        DEC DUP
+        DEC LDB OVR STB
+        DUP LIT 1 GTH LIT @move JCN
+    POP
+
+        LIT dir: 1 LIT 0 LDB
+        OVR LIT 0 EQU LIT @up    JCR
+        OVR LIT 1 EQU LIT @right JCR
+        OVR LIT 2 EQU LIT @down  JCR
+        OVR LIT 3 EQU LIT @left  JCR
+        LIT 0 STB POP
+        LIT len: 3 
+        
+    draw: 
+        DEC DUP
+        LDB LIT 1 SET
+        DUP LIT 1 GTH LIT @draw JCN 
+            POP
+        LIT 0 LDB
+        DUP GET LIT @game_over JCN
+            LIT tar: 7a DUP LIT 1 SET
+        OVR EQU LIT @hit JCR
+        LIT 1 SET
+
+    end: 
+BRK
+
+hit: 
+    LIT @len LDA INC LIT @len STA RND LIT @tar STA 
+JMPr
+
+right: 
+    INC 
+JMPr
+
+left:  
+    DEC 
+JMPr
+
+down: 
+    LIT 10 ADD 
+JMPr
+
+up:   
+    LIT 10 SUB 
+JMPr
+
+ctrl: 
+    KEY
+    LIT @dir LDA
+    OVR LIT 8 EQU LIT @right JCR
+    OVR LIT 4 EQU LIT @left  JCR
+    LIT 4 MOD LIT @dir STA POP
+BRK
+
+game_over: 
+    LIT 0 LIT 0 STA 
+BRK
